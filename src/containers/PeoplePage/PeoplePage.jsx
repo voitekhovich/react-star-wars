@@ -2,6 +2,8 @@ import { Fragment, useEffect, useState } from "react";
 
 import { API_PEOPLE } from "../../constance/api";
 import { getApiResource } from "../../utils/network";
+import { getPeopleId, getPeopleImage } from "../../services/getPeopleData";
+import PeopleList from "../../components/PeoplePage/PeopleList/PeopleList";
 
 // import styles from "./PeoplePage.module.css";
 
@@ -11,11 +13,17 @@ const PeoplePage = () => {
   const getResource = async (url) => {
     const body = await getApiResource(url);
     const peopleList = body.results.map(({ name, url }) => {
+      const id = getPeopleId(url);
+      const img = getPeopleImage(id);
+      
       return {
+        id,
         name,
-        url,
+        img,
       };
     });
+    
+    // console.log(peopleList);
     setPeople(peopleList);
   };
 
@@ -25,13 +33,7 @@ const PeoplePage = () => {
 
   return (
     <Fragment>
-      {people && (
-        <ul>
-          {people.map(({ name, url }) => (
-            <li key={name}>{name}</li>
-          ))}
-        </ul>
-      )}
+      {people && <PeopleList people={people} />}
     </Fragment>
   );
 };
