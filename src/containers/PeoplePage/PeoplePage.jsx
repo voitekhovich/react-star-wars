@@ -9,22 +9,29 @@ import PeopleList from "../../components/PeoplePage/PeopleList/PeopleList";
 
 const PeoplePage = () => {
   const [people, setPeople] = useState(null);
+  const [errorApi, setErrorApi] = useState(false);
 
   const getResource = async (url) => {
     const body = await getApiResource(url);
-    const peopleList = body.results.map(({ name, url }) => {
-      const id = getPeopleId(url);
-      const img = getPeopleImage(id);
-      
-      return {
-        id,
-        name,
-        img,
-      };
-    });
-    
-    // console.log(peopleList);
-    setPeople(peopleList);
+
+    if (body) {
+      const peopleList = body.results.map(({ name, url }) => {
+        const id = getPeopleId(url);
+        const img = getPeopleImage(id);
+
+        return {
+          id,
+          name,
+          img,
+        };
+      });
+
+      // console.log(peopleList);
+      setPeople(peopleList);
+      setErrorApi(false);
+    } else {
+      setErrorApi(true);
+    }
   };
 
   useEffect(() => {
@@ -33,9 +40,12 @@ const PeoplePage = () => {
 
   return (
     <Fragment>
-      {people && <PeopleList people={people} />}
-    </Fragment>
-  );
+      {errorApi 
+        ? <h1>ERRORAPI</h1>
+        : people && <PeopleList people={people} />
+      }
+    </Fragment> 
+  )
 };
 
 export default PeoplePage;
