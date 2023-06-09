@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import { withErrorApi } from "@hoc-helpers/withErrorApi";
@@ -39,7 +39,12 @@ const PeoplePage = ({ setErrorApi }) => {
     getResource(API_PEOPLE);
   }, []);
 
-  return people && <PeopleList people={people} />;
+  return (
+    <Fragment>
+      <h1 className="header__text">PEOPLE PAGE</h1>
+      {people && <PeopleList people={people} />}
+    </Fragment>
+  );
 };
 
 PeoplePage.propTypes = {
