@@ -1,4 +1,5 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { withErrorApi } from "../../hoc-helpers/withErrorApi";
 
 import { API_PEOPLE } from "../../constance/api";
 import { getApiResource } from "../../utils/network";
@@ -7,9 +8,8 @@ import PeopleList from "../../components/PeoplePage/PeopleList/PeopleList";
 
 // import styles from "./PeoplePage.module.css";
 
-const PeoplePage = () => {
+const PeoplePage = ({ setErrorApi }) => {
   const [people, setPeople] = useState(null);
-  const [errorApi, setErrorApi] = useState(false);
 
   const getResource = async (url) => {
     const body = await getApiResource(url);
@@ -38,14 +38,7 @@ const PeoplePage = () => {
     getResource(API_PEOPLE);
   }, []);
 
-  return (
-    <Fragment>
-      {errorApi 
-        ? <h1>ERRORAPI</h1>
-        : people && <PeopleList people={people} />
-      }
-    </Fragment> 
-  )
+  return people && <PeopleList people={people} />;
 };
 
-export default PeoplePage;
+export default withErrorApi(PeoplePage);
