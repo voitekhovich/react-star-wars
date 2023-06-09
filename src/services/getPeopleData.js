@@ -4,7 +4,7 @@ import {
   SWAPI_PEOPLE,
   URL_IMG_PERSON,
   GUIDE_IMG_EXTENSION,
-} from "../constance/api";
+} from "../constants/api";
 
 const getId = (url, category) => {
   const id = url.replace(HTTPS + SWAPI_ROOT + category, "").replace(/\//g, "");
