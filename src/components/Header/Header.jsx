@@ -15,6 +15,11 @@ const Header = () => {
             PEOPLE
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/not-found" end>
+            NOT FOUND
+          </NavLink>
+        </li>
       </ul>
     </div>
   );
