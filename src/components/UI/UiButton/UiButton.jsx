@@ -17,7 +17,7 @@ const UiButton = ({ text, onClick, disabled, theme = "dark", classes }) => {
 
 UiButton.propTypes = {
   text: PropTypes.string,
-  onClick: PropTypes.string,
+  onClick: PropTypes.func,
   disabled: PropTypes.bool,
   theme: PropTypes.string,
   classes: PropTypes.string,
