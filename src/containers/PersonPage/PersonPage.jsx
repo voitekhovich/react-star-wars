@@ -7,6 +7,8 @@ import { getPeopleImage } from "@services/getPeopleData";
 import { API_PERSON } from "@constants/api";
 import { getApiResource } from "@utils/network";
 import styles from "./PersonPage.module.css";
+import PersonInfo from "@components/PersonPage/PersonInfo/PersonInfo";
+import PersonPhoto from "@components/PersonPage/PersonPhoto/PersonPhoto";
 
 const PersonPage = ({ setErrorApi }) => {
   let params = useParams();
@@ -30,7 +32,7 @@ const PersonPage = ({ setErrorApi }) => {
           { title: "Skin Color", data: res.skin_color },
         ]);
         setPersonName(res.name);
-        setPersonPhoto(getPeopleImage(params.id))
+        setPersonPhoto(getPeopleImage(params.id));
 
         // res.films
 
@@ -42,24 +44,13 @@ const PersonPage = ({ setErrorApi }) => {
   }, []);
 
   return (
-    <Fragment>
-      <h1 className={styles.color}>{personName}</h1>
-      <img src={personPhoto} alt={personName} />
-      {personInfo && (
-        <ul className={styles.color}>
-          {personInfo.map(
-            ({ title, data }) =>
-              data && (
-                <li key={title}>
-                  <span>
-                    {title}: {data}
-                  </span>
-                </li>
-              )
-          )}
-        </ul>
-      )}
-    </Fragment>
+    <div className={styles.wrapper}>
+      <span className={styles.person__name}>{personName}</span>
+      <div className={styles.container}>
+        <PersonPhoto personName={personName} personPhoto={personPhoto} />
+        {personInfo && <PersonInfo personInfo={personInfo} />}
+      </div>
+    </div>
   );
 };
 
