@@ -5,10 +5,10 @@ import { HTTP, HTTPS } from "../constants/api";
  * @param {String} url - url для изменения
  * @returns {String} - url с HTTPS
  */
-export const changeHTTP = url => {
-  const result = url? url.replace(HTTP, HTTPS) : url;
+export const changeHTTP = (url) => {
+  const result = url ? url.replace(HTTP, HTTPS) : url;
   return result;
-}
+};
 
 /**
  * Отправляет запрос Fetch
@@ -25,7 +25,11 @@ export const getApiResource = async (url) => {
   }
 };
 
-// (async () => {
-//   const body = await getApiResource(SWAPI_ROOT + SWAPI_PEOPLE);
-//   console.log(body);
-// })();
+export const makeConcurrentRequest = async (url) => {
+  const res = await Promise.all(
+    url.map((res) => {
+      return fetch(res).then((res) => res.json());
+    })
+  );
+  return res;
+};
