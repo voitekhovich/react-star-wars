@@ -3,12 +3,15 @@ import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import { withErrorApi } from "@hoc-helpers/withErrorApi";
+
+import PersonInfo from "@components/PersonPage/PersonInfo/PersonInfo";
+import PersonPhoto from "@components/PersonPage/PersonPhoto/PersonPhoto";
+import PersonLinkBack from "@components/PersonPage/PersonLinkBack/PersonLinkBack";
+
 import { getPeopleImage } from "@services/getPeopleData";
 import { API_PERSON } from "@constants/api";
 import { getApiResource } from "@utils/network";
 import styles from "./PersonPage.module.css";
-import PersonInfo from "@components/PersonPage/PersonInfo/PersonInfo";
-import PersonPhoto from "@components/PersonPage/PersonPhoto/PersonPhoto";
 
 const PersonPage = ({ setErrorApi }) => {
   let params = useParams();
@@ -44,13 +47,16 @@ const PersonPage = ({ setErrorApi }) => {
   }, []);
 
   return (
-    <div className={styles.wrapper}>
-      <span className={styles.person__name}>{personName}</span>
-      <div className={styles.container}>
-        <PersonPhoto personName={personName} personPhoto={personPhoto} />
-        {personInfo && <PersonInfo personInfo={personInfo} />}
+    <Fragment>
+      <PersonLinkBack />
+      <div className={styles.wrapper}>
+        <span className={styles.person__name}>{personName}</span>
+        <div className={styles.container}>
+          <PersonPhoto personName={personName} personPhoto={personPhoto} />
+          {personInfo && <PersonInfo personInfo={personInfo} />}
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 

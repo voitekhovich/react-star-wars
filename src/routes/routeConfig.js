@@ -10,17 +10,17 @@ const routeConfig = [
     element: <HomePage />,
   },
   {
-    path: "/people",
+    path: "people",
     end: true,
     element: <PeoplePage />,
   },
   {
-    path: "/people/:id",
+    path: "people/:id",
     end: true,
     element: <PersonPage />,
   },
   {
-    path: "/not-found",
+    path: "not-found",
     end: true,
     element: <NotFoundPage />,
   },

@@ -11,7 +11,8 @@ const Header = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/people/?page=1" end>
+          {/* НЕ ПОДСВЕЧИВАЕТСЯ КНОПКА PEOPLE ПРИ ВЫБОРЕ ПЕРСОНАЖА */}
+          <NavLink to="/people/?page=1">
             PEOPLE
           </NavLink>
         </li>
