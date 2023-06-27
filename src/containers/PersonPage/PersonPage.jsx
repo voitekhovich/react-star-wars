@@ -4,9 +4,10 @@ import PropTypes from "prop-types";
 
 import { withErrorApi } from "@hoc-helpers/withErrorApi";
 
-import PersonInfo from "@components/PersonPage/PersonInfo/PersonInfo";
-import PersonPhoto from "@components/PersonPage/PersonPhoto/PersonPhoto";
-import PersonLinkBack from "@components/PersonPage/PersonLinkBack/PersonLinkBack";
+import PersonInfo from "@components/PersonPage/PersonInfo";
+import PersonPhoto from "@components/PersonPage/PersonPhoto";
+import PersonLinkBack from "@components/PersonPage/PersonLinkBack";
+import PersonFilms from "@components/PersonPage/PersonFilms";
 
 import { getPeopleImage } from "@services/getPeopleData";
 import { API_PERSON } from "@constants/api";
@@ -18,6 +19,7 @@ const PersonPage = ({ setErrorApi }) => {
   const [personInfo, setPersonInfo] = useState([]);
   const [personName, setPersonName] = useState();
   const [personPhoto, setPersonPhoto] = useState();
+  const [personFilms, setPersonFilms] = useState();
 
   useEffect(() => {
     (async () => {
@@ -36,8 +38,7 @@ const PersonPage = ({ setErrorApi }) => {
         ]);
         setPersonName(res.name);
         setPersonPhoto(getPeopleImage(params.id));
-
-        // res.films
+        res.films.length && setPersonFilms(res.films);
 
         setErrorApi(false);
       } else {
@@ -54,6 +55,7 @@ const PersonPage = ({ setErrorApi }) => {
         <div className={styles.container}>
           <PersonPhoto personName={personName} personPhoto={personPhoto} />
           {personInfo && <PersonInfo personInfo={personInfo} />}
+          {personFilms && <PersonFilms personFilms={personFilms} />}
         </div>
       </div>
     </Fragment>
