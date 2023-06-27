@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -7,12 +7,16 @@ import { withErrorApi } from "@hoc-helpers/withErrorApi";
 import PersonInfo from "@components/PersonPage/PersonInfo";
 import PersonPhoto from "@components/PersonPage/PersonPhoto";
 import PersonLinkBack from "@components/PersonPage/PersonLinkBack";
-import PersonFilms from "@components/PersonPage/PersonFilms";
+import UiLoading from "@UI/UiLoading";
 
 import { getPeopleImage } from "@services/getPeopleData";
 import { API_PERSON } from "@constants/api";
 import { getApiResource } from "@utils/network";
 import styles from "./PersonPage.module.css";
+
+const PersonFilms = React.lazy(() =>
+  import("@components/PersonPage/PersonFilms")
+);
 
 const PersonPage = ({ setErrorApi }) => {
   let params = useParams();
@@ -55,7 +59,11 @@ const PersonPage = ({ setErrorApi }) => {
         <div className={styles.container}>
           <PersonPhoto personName={personName} personPhoto={personPhoto} />
           {personInfo && <PersonInfo personInfo={personInfo} />}
-          {personFilms && <PersonFilms personFilms={personFilms} />}
+          {personFilms && (
+            <Suspense fallback={<UiLoading theme={"white"} isShadow />}>
+              <PersonFilms personFilms={personFilms} />
+            </Suspense>
+          )}
         </div>
       </div>
     </Fragment>
