@@ -11,7 +11,6 @@ const PersonFilms = ({ personFilms }) => {
     (async () => {
       const responce = await makeConcurrentRequest(personFilms);
       setFilmsName(responce);
-      console.log(responce);
     })();
   }, []);
 

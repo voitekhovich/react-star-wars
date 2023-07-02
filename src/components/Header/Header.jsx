@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import Favorite from "@components/Favorite/Favorite";
 import styles from "./Header.module.css";
 
 const Header = () => {
@@ -12,9 +13,7 @@ const Header = () => {
         </li>
         <li>
           {/* НЕ ПОДСВЕЧИВАЕТСЯ КНОПКА PEOPLE ПРИ ВЫБОРЕ ПЕРСОНАЖА */}
-          <NavLink to="/people/?page=1">
-            PEOPLE
-          </NavLink>
+          <NavLink to="/people/?page=1">PEOPLE</NavLink>
         </li>
         <li>
           <NavLink to="/not-found" end>
@@ -22,6 +21,7 @@ const Header = () => {
           </NavLink>
         </li>
       </ul>
+      <Favorite />
     </div>
   );
 };

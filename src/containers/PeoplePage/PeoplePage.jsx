@@ -22,12 +22,8 @@ const PeoplePage = ({ setErrorApi }) => {
   const query = useQueryParams();
   const queryPage = query.get("page");
 
-  // console.log(queryPage);
-
   const getResource = async (url) => {
     const body = await getApiResource(url);
-
-    // console.log(body);
 
     if (body) {
       const peopleList = body.results.map(({ name, url }) => {
@@ -41,7 +37,6 @@ const PeoplePage = ({ setErrorApi }) => {
         };
       });
 
-      // console.log(peopleList);
       setPeople(peopleList);
       setPrevPage(changeHTTP(body.previous));
       setNextPage(changeHTTP(body.next));
