@@ -31,6 +31,7 @@ const Header = () => {
         setIcon(iconNeitral);
         break;
       default:
+        setIcon(iconDark);
         break;
     }
   }, [isTheme]);
