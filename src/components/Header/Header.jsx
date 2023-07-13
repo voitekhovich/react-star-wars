@@ -54,6 +54,11 @@ const Header = () => {
             NOT FOUND
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/search" end>
+            SEARCH
+          </NavLink>
+        </li>
       </ul>
       <Favorite />
     </div>
