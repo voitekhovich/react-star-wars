@@ -55,6 +55,14 @@
   --theme-default-bgimage: var(--theme-neitral-bgimage);
 }
 
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+}
+
 body {
   margin: 0;
   padding: 0;

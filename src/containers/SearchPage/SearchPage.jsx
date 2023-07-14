@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { debounce } from "lodash";
 import { PropTypes } from "prop-types";
 import { getApiResource } from "@utils/network";
 import { API_SEARCH } from "@constants/api";
 import { withErrorApi } from "@hoc-helpers/withErrorApi";
 import { getPeopleId, getPeopleImage } from "@services/getPeopleData";
+import SearchPageInfo from "@components/SearchPage/SearchPageInfo";
 import styles from "./SearchPage.module.css";
+import UiInput from "../../components/UI/UiInput/UiInput";
 
 const SearchPage = ({ setErrorApi }) => {
   const [inputSearchValue, setInputSearchValue] = useState("");
   const [people, setPeople] = useState([]);
 
   const getResponce = async (params) => {
+    console.log(params);
     const res = await getApiResource(API_SEARCH + params);
 
     if (res) {
@@ -24,28 +28,36 @@ const SearchPage = ({ setErrorApi }) => {
         };
       });
       setPeople(peopleList);
-      console.log(peopleList);
       setErrorApi(false);
     } else {
       setErrorApi(true);
     }
   };
 
-  const handleInputChange = (event) => {
-    const value = event.target.value;
+  useEffect(() => {
+    getResponce("");
+  }, []);
+
+  const deboucedGetResponse = useCallback(
+    debounce((value) => getResponce(value), 300),
+    []
+  );
+
+  const handleInputChange = (value) => {
     setInputSearchValue(value);
-    getResponce(value);
+    deboucedGetResponse(value);
   };
 
   return (
     <div>
       <h1 className="header__text">SEARCH PAGE</h1>
-      <input
-        type="text"
+      <UiInput
+        classes={styles.input__search}
         value={inputSearchValue}
-        onChange={handleInputChange}
+        handleInputChange={handleInputChange}
         placeholder="Search Characters"
       />
+      <SearchPageInfo people={people} />
     </div>
   );
 };
