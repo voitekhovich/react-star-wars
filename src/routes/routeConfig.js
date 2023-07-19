@@ -4,6 +4,7 @@ import HomePage from "@containers/HomePage";
 import NotFoundPage from "@containers/NotFoundPage";
 import FavoritesPage from "@containers/FavoritesPage";
 import SearchPage from "@containers/SearchPage";
+import ErrorMessage from "@components/ErrorMessage";
 
 const routeConfig = [
   {
@@ -35,6 +36,11 @@ const routeConfig = [
     path: "not-found",
     end: true,
     element: <NotFoundPage />,
+  },
+  {
+    path: "fail",
+    end: true,
+    element: <ErrorMessage />,
   },
   {
     path: "*",

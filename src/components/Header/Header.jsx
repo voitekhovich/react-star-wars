@@ -59,6 +59,11 @@ const Header = () => {
             SEARCH
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/fail" end>
+            FAIL
+          </NavLink>
+        </li>
       </ul>
       <Favorite />
     </div>
