@@ -9,6 +9,7 @@ const App = () => {
     <BrowserRouter>
       <div className={styles.wraper}>
         <Header />
+        <h1>RUN!</h1>
         <Routes>
           {routeConfig.map((route) => (
             <Route
