@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import routeConfig from "@routes/routeConfig";
 import Header from "@components/Header";
+import { REPO_NAME } from "@constants/repo";
 
 import styles from "./App.module.css";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={`/${REPO_NAME}/`}>
       <div className={styles.wraper}>
         <Header />
-        <h1>RUN!</h1>
         <Routes>
           {routeConfig.map((route) => (
             <Route
