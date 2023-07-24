@@ -15,9 +15,11 @@ import { API_PERSON } from "@constants/api";
 import { getApiResource } from "@utils/network";
 import styles from "./PersonPage.module.css";
 
-const PersonFilms = React.lazy(() =>
-  import("@components/PersonPage/PersonFilms")
-);
+import PersonFilms from "@components/PersonPage/PersonFilms";
+
+// const PersonFilms = React.lazy(() =>
+//   import("@components/PersonPage/PersonFilms")
+// );
 
 const PersonPage = ({ setErrorApi }) => {
   let params = useParams();

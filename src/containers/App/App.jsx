@@ -7,7 +7,8 @@ import styles from "./App.module.css";
 
 const App = () => {
   return (
-    <BrowserRouter basename={`/${REPO_NAME}/`}>
+    // <BrowserRouter basename={`/${REPO_NAME}/`}>
+    <BrowserRouter>
       <div className={styles.wraper}>
         <Header />
         <Routes>
